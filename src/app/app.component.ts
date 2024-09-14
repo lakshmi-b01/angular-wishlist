@@ -22,7 +22,7 @@ export class AppComponent {
     new WishItem('Go on a hike')
   ];
 
-  activeFilter: any = () => {};
+  activeFilter: any;
 
   onAddWish(newWish: WishItem) {
     this.items.push(newWish);

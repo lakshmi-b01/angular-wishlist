@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { WishItem } from '../../shared/models/wishItem';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -18,18 +18,20 @@ const filters = [
 })
 export class WishFilterComponent implements OnInit{
 
-  @Output() filterChanged = new EventEmitter<any>();
+  @Input() filter: any;
+  @Output() filterChange = new EventEmitter<any>();
 
   constructor(){}
 
   ngOnInit(): void{
-    this.filterChanged.emit(filters[0]);
+    this.updateFilter('0');
   }
 
   listFilter : any = '0';
 
-  changeFilter(value : any){
-    this.filterChanged.emit(filters[value]);
+  updateFilter(value : any){
+    this.filter = filters[value];
+    this.filterChange.emit(this.filter);
   }
 
 }

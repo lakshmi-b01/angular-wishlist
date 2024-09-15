@@ -7,14 +7,15 @@ import { TheWishListComponent } from './the-wish-list/the-wish-list.component';
 import { AddWishFormComponent } from './add-wish-form/add-wish-form.component';
 import { WishFilterComponent } from './wish-filter/wish-filter.component';
 import { WishListItemComponent } from './wish-list-item/wish-list-item.component';
-import events from './../shared/services/EvenService';
+import { EventService } from './../shared/services/EvenService';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, CommonModule, FormsModule, TheWishListComponent, AddWishFormComponent, WishFilterComponent, WishListItemComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
+  // providers: [EventService] 
 })
 export class AppComponent implements OnInit {
   items : WishItem[]= [
@@ -23,7 +24,7 @@ export class AppComponent implements OnInit {
     new WishItem('Go on a hike')
   ];
 
-  constructor(){
+  constructor(private events: EventService){
     events.listen('removeWish', (wish : any) => {
       let index = this.items.indexOf(wish);
       this.items.splice(index, 1);

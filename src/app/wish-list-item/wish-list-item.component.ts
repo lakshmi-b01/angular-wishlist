@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { WishItem } from '../../shared/models/wishItem';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import events from './../../shared/services/EvenService';
+import { EventService } from './../../shared/services/EvenService';
 
 @Component({
   selector: 'wish-list-item',
@@ -20,8 +20,10 @@ export class WishListItemComponent {
     return {'strikeout text-muted' : this.wish.isComplete};
   }
 
+  constructor(private events: EventService){}
+
   removeWish(){
-    events.emit('removeWish', this.wish); 
+    this.events.emit('removeWish', this.wish); 
   }
 
   toggleFullfilled(){

@@ -15,14 +15,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class ContactComponent {
 
-  // senderNameControl = new FormControl('', [Validators.required]);
-  // senderEmailControl = new FormControl('', [Validators.required, Validators.email]);
-  // senderMessageControl = new FormControl('', [Validators.required]);
-
   contactForm = new FormGroup({
-    senderName: new FormControl(''),
-    senderEmail: new FormControl(''),
-    senderMessage: new FormControl(''),
+    senderName: new FormControl('', Validators.required),
+    senderEmail: new FormControl('', [Validators.required, Validators.email]),
+    senderMessage: new FormControl('', [Validators.required, Validators.minLength(10)]),
   });
 
   submitForm() {
